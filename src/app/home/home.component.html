@@ -1,10 +1,15 @@
-<app-section imgSrc="sandra-image-1.jpg" title="Sandra Sanseverino" />
-<app-section imgSrc="sandra-image-2.jpg" title="Collection 1" />
-<app-section imgSrc="sandra-image-3.jpg" title="Collection 2" />
-<app-section imgSrc="sandra-image-4.jpg" title="Collection 3" />
-
-<!--<app-section imgSrc="compressed_sandra-image-1.webp" title="Sandra Sanseverino" />-->
-<!--<app-section imgSrc="compressed_sandra-image-2.webp" title="Collection 1" />-->
-<!--<app-section imgSrc="compressed_sandra-image-3.webp" title="Collection 2" />-->
-<!--<app-section imgSrc="compressed_sandra-image-4.webp" title="Collection 3" />-->
-
+@switch (pageLayoutRessource.status()) {
+  @case (resourceStatus.Loading){
+<!--    TODO: faire un loader-->
+    <p>Chargement de l'app</p>
+  }
+  @case (resourceStatus.Error) {
+<!--    TODO: faire un page d'erreur/maintenance-->
+    <p>Erreur lors du chargement</p>
+  }
+  @case (resourceStatus.Resolved) {
+    @for (section of pageLayoutRessource.value()?.sections; track $index) {
+      <app-section [sectionLayout]="section" />
+    }
+  }
+}

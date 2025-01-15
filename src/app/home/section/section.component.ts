@@ -1,6 +1,7 @@
-import {Component, input} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {NgStyle} from '@angular/common';
 import {environment} from '../../../environments/environment';
+import {SectionLayout} from '../../../models/section-layout.model';
 
 @Component({
   selector: 'app-section',
@@ -11,11 +12,9 @@ import {environment} from '../../../environments/environment';
   styleUrl: './section.component.scss'
 })
 export class SectionComponent {
-  public imgSrc = input.required<string>();
-  public title = input.required<string>();
+  public readonly sectionLayout: InputSignal<SectionLayout> = input.required<SectionLayout>();
 
   protected get imageUrl() {
-    console.log(`${environment.imagesBucket}${this.imgSrc()}`);
-    return environment.imagesBucket + this.imgSrc();
+    return environment.imagesBucket + this.sectionLayout().imgUrl;
   }
 }

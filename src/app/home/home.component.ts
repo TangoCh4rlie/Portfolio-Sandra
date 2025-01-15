@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject, ResourceStatus} from '@angular/core';
 import {SectionComponent} from './section/section.component';
+import {BucketService} from '../../services/bucket.service';
 
 @Component({
   selector: 'app-home',
@@ -10,5 +11,8 @@ import {SectionComponent} from './section/section.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  private readonly bucketService: BucketService = inject(BucketService);
+  protected readonly resourceStatus = ResourceStatus;
 
+  protected pageLayoutRessource = this.bucketService.payeLayoutRessource;
 }
